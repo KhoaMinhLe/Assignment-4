@@ -1,0 +1,152 @@
+//Created by: Khoa Le
+//Created on: April 2 2019
+//This program receives 3 pieces of information from a triangle and calculates the perimeter and area.
+
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Assign4_1 {
+
+	public static void main(String[] args) {
+		String userInput = "";
+		
+		System.out.println("Note: The unit is cm.");
+		System.out.println("What kind of info do you have on the triangle?");
+		System.out.println("Enter: 1 (3 sides), 2 (2 sides, 1 angle), 3 (2 angles, 1 side).");
+		
+		Scanner input = new Scanner(System.in);
+		userInput = input.next();
+		
+		if (userInput.equals("1")) {
+			double lengthA = 0;
+			double lengthB = 0;
+			double lengthC = 0;
+			double perimeter = 0;
+			double s = 0;
+			double aBeforeSqrt = 0;
+			double area = 0;
+			
+			System.out.println("Enter side A of the triangle.");
+			Scanner inputLengthA = new Scanner(System.in);
+			lengthA = inputLengthA.nextDouble();
+			System.out.println("Enter side B of the triangle.");
+			Scanner inputLengthB = new Scanner(System.in);
+			lengthB = inputLengthB.nextDouble();
+			System.out.println("Enter side C of the triangle.");
+			Scanner inputLengthC = new Scanner(System.in);
+			lengthC = inputLengthC.nextDouble();
+			
+			//Calculates the perimeter of the triangle.
+			perimeter = lengthA + lengthB + lengthC;
+			//Calculates the semi-perimeter of the triangle.
+			s = perimeter / 2;
+			
+			//Calculates area of triangle.
+			aBeforeSqrt = s * (s - lengthA) * (s - lengthB)  *(s - lengthC);
+			area = Math.sqrt(aBeforeSqrt);
+			
+			//Makes so the numbers are displayed by 2 decimal places.
+			DecimalFormat areaFormat = new DecimalFormat("###.##");
+			DecimalFormat perimeterFormat = new DecimalFormat("###");
+			System.out.println("The area of the triangle is " + areaFormat.format(area) + " cm^2 and the perimeter of the triangle is " + perimeterFormat.format(perimeter) + " cm.");
+			
+		}
+		else if (userInput.equals("2")) {
+			double lengthA = 0;
+			double lengthB = 0;
+			double AngleB = 0;
+			double AngleBSin = 0;
+			double area = 0;
+			double AngleA = 0;
+			double AngleC = 0;
+			double perimeter = 0;
+			double lengthC = 0;
+			
+			System.out.println("Enter side A of the triangle.");
+			Scanner inputLengthA = new Scanner(System.in);
+			lengthA = inputLengthA.nextDouble();
+			System.out.println("Enter side B of the triangle.");
+			Scanner inputLengthB = new Scanner(System.in);
+			lengthB = inputLengthB.nextDouble();
+			
+			System.out.println("Enter angle B of the triangle.");
+			Scanner inputAngleB = new Scanner(System.in);
+			AngleB = inputAngleB.nextDouble();
+			double AngleBRad = Math.toRadians(AngleB);
+			AngleBSin = Math.sin(AngleBRad);
+			
+			//Calculates the area of the triangle.
+			area = (lengthA * lengthB * AngleBSin) / 2;
+			
+			//Finds angle A of the triangle.
+			AngleA = (AngleB / lengthB) * lengthA;
+			
+			//Finds angle C of the triangle.
+			AngleC = 180 - (AngleA + AngleB);
+			
+			//Finds side C of the triangle.
+			lengthC = lengthB * (AngleC / AngleB);
+			
+			//Calculates the perimeter of the triangle.
+			perimeter = lengthA + lengthB + lengthC;
+			
+			//Formats the numbers so they display with 2 decimal places.
+			DecimalFormat areaFormat = new DecimalFormat("###.##");
+			DecimalFormat perimeterFormat = new DecimalFormat("###.##");
+			System.out.println("The area of the triangle is " + areaFormat.format(area) + " cm^2.");
+			System.out.println("The perimeter of the triangle is " + perimeterFormat.format(perimeter) + " cm.");
+		}
+		else if (userInput.equals("3")) {
+			double AngleA = 0;
+			double AngleASin = 0;
+			double AngleB = 0;
+			double AngleBSin = 0;
+			double lengthA = 0;
+			double area =  0;
+			double lengthB = 0;
+			double unknownAngle = 0;
+			double lengthC = 0; 
+			double AngleCSin = 0;
+			double perimeter = 0;
+			
+			System.out.println("Enter angle A of the triangle.");
+			Scanner inputAngleA = new Scanner(System.in);
+			AngleA = inputAngleA.nextDouble();
+			double AngleARad = Math.toRadians(AngleA);
+			AngleASin = Math.sin(AngleARad);
+			System.out.println("Enter angle B of the triangle.");
+			Scanner inputAngleB = new Scanner(System.in);
+			AngleB = inputAngleB.nextDouble();
+			double AngleBRad = Math.toRadians(AngleB);
+			AngleBSin = Math.sin(AngleBRad);
+			
+			System.out.println("Enter side A of the triangle.");
+			Scanner inputLengthA = new Scanner(System.in);
+			lengthA = inputLengthA.nextDouble();
+			
+			//Calculates side B of the triangle.
+			lengthB = lengthA * (AngleBSin / AngleASin);
+			
+			//Calculates the area of the triangle.
+			area = (lengthA * lengthB * AngleASin) / 2;
+			
+			//Finds the unknown angle, angle C.
+			unknownAngle = 180 - (AngleA + AngleB);
+			double AngleCRad = Math.toRadians(unknownAngle);
+			AngleCSin = Math.sin(AngleCRad);
+			
+			//Finds what length C is.
+			lengthC = lengthA * (AngleCSin / AngleASin);
+			
+			//Calculates the perimeter of the triangle.
+			perimeter = lengthA + lengthB + lengthC;
+			
+			//Displays the numbers with 2 decimal places.
+			DecimalFormat areaFormat = new DecimalFormat("###.##");
+			DecimalFormat perimeterFormat = new DecimalFormat("###.##");
+			System.out.println("The area of the triangle is " + areaFormat.format(area) + " cm^2.");
+			System.out.println("The perimeter is " + perimeterFormat.format(perimeter) + " cm.");
+			
+		}
+	}
+}
